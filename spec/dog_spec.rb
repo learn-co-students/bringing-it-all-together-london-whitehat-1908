@@ -102,33 +102,6 @@ describe "Dog" do
     end
   end
 
-  describe '.find_or_create_by' do
-    it 'creates an instance of a dog if it does not already exist' do
-      dog1 = Dog.create(name: 'teddy', breed: 'cockapoo')
-      dog2 = Dog.find_or_create_by(name: 'teddy', breed: 'cockapoo')
-
-      expect(dog2.id).to eq(dog1.id)
-    end
-    it 'when two dogs have the same name and different breed, it returns the correct dog' do
-      dog1 = Dog.create(name: 'teddy', breed: 'cockapoo')
-      dog2 = Dog.create(name: 'teddy', breed: 'pug')
-
-      dog_from_db = Dog.find_or_create_by({name: 'teddy', breed: 'cockapoo'})
-
-      expect(dog_from_db.id).to eq(1)
-      expect(dog_from_db.id).to eq(dog1.id)
-    end
-    it 'when creating a new dog with the same name as persisted dogs, it returns the correct dog' do
-      dog1 = Dog.create(name: 'teddy', breed: 'cockapoo')
-      dog2 = Dog.create(name: 'teddy', breed: 'pug')
-
-      new_dog = Dog.find_or_create_by({name: 'teddy', breed: 'irish setter'})
-
-      expect(new_dog.id).to eq(3)
-    end
-  end
-
-  
 
   describe '.find_by_name' do
     it 'returns an instance of dog that matches the name from the DB' do
